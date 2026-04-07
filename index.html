@@ -443,7 +443,7 @@ textarea:focus, input:focus { border-color: var(--accent); background: #fff; }
           </div>
           <div class="action-row">
             <button class="btn primary" onclick="doZh()">立即转换</button>
-            <button class="btn" onclick="zh_in.value='';zh_out.value=''">清空</button>
+            <button class="btn" onclick="document.getElementById('zh-in').value='';document.getElementById('zh-out').value='';document.getElementById('zh-stats').style.display='none'">清空</button>
             <button class="btn" onclick="cp('zh-out','zh-tip')">复制结果</button>
             <span class="copy-tip" id="zh-tip"></span>
           </div>
@@ -504,7 +504,7 @@ textarea:focus, input:focus { border-color: var(--accent); background: #fff; }
           </div>
           <div class="action-row">
             <button class="btn primary" onclick="doCap()">立即转换</button>
-            <button class="btn" onclick="cap_in.value='';cap_out.value=''">清空</button>
+            <button class="btn" onclick="document.getElementById('cap-in').value='';document.getElementById('cap-out').value=''">清空</button>
             <button class="btn" onclick="cp('cap-out','cap-tip')">复制结果</button>
             <span class="copy-tip" id="cap-tip"></span>
           </div>
@@ -565,7 +565,7 @@ textarea:focus, input:focus { border-color: var(--accent); background: #fff; }
           </div>
           <div class="action-row">
             <button class="btn primary" onclick="doNum()">立即转换</button>
-            <button class="btn" onclick="num_in.value='';num_out.value=''">清空</button>
+            <button class="btn" onclick="document.getElementById('num-in').value='';document.getElementById('num-out').value=''">清空</button>
             <button class="btn" onclick="cp('num-out','num-tip')">复制结果</button>
             <span class="copy-tip" id="num-tip"></span>
           </div>
@@ -608,7 +608,7 @@ textarea:focus, input:focus { border-color: var(--accent); background: #fff; }
           </div>
           <div class="action-row">
             <button class="btn primary" onclick="doEn()">立即转换</button>
-            <button class="btn" onclick="en_in.value='';en_out.value=''">清空</button>
+            <button class="btn" onclick="document.getElementById('en-in').value='';document.getElementById('en-out').value=''">清空</button>
             <button class="btn" onclick="cp('en-out','en-tip')">复制结果</button>
             <span class="copy-tip" id="en-tip"></span>
           </div>
@@ -658,7 +658,7 @@ textarea:focus, input:focus { border-color: var(--accent); background: #fff; }
             </div>
           </div>
           <div class="action-row" style="margin-top:14px;">
-            <button class="btn" onclick="wc_in.value='';doWc()">清空</button>
+            <button class="btn" onclick="document.getElementById('wc-in').value='';doWc()">清空</button>
             <button class="btn" onclick="cp('wc-in','wc-tip')">复制文本</button>
             <span class="copy-tip" id="wc-tip"></span>
           </div>
@@ -701,7 +701,7 @@ textarea:focus, input:focus { border-color: var(--accent); background: #fff; }
           </div>
           <div class="action-row">
             <button class="btn primary" onclick="doUrl()">立即转换</button>
-            <button class="btn" onclick="url_in.value='';url_out.value=''">清空</button>
+            <button class="btn" onclick="document.getElementById('url-in').value='';document.getElementById('url-out').value=''">清空</button>
             <button class="btn" onclick="cp('url-out','url-tip')">复制结果</button>
             <span class="copy-tip" id="url-tip"></span>
           </div>
@@ -747,7 +747,7 @@ textarea:focus, input:focus { border-color: var(--accent); background: #fff; }
           </div>
           <div class="action-row">
             <button class="btn primary" onclick="doB64()">立即转换</button>
-            <button class="btn" onclick="b64_in.value='';b64_out.value=''">清空</button>
+            <button class="btn" onclick="document.getElementById('b64-in').value='';document.getElementById('b64-out').value=''">清空</button>
             <button class="btn" onclick="cp('b64-out','b64-tip')">复制结果</button>
             <span class="copy-tip" id="b64-tip"></span>
           </div>
@@ -790,7 +790,7 @@ textarea:focus, input:focus { border-color: var(--accent); background: #fff; }
           </div>
           <div class="action-row">
             <button class="btn primary" onclick="doUni()">立即转换</button>
-            <button class="btn" onclick="uni_in.value='';uni_out.value=''">清空</button>
+            <button class="btn" onclick="document.getElementById('uni-in').value='';document.getElementById('uni-out').value=''">清空</button>
             <button class="btn" onclick="cp('uni-out','uni-tip')">复制结果</button>
             <span class="copy-tip" id="uni-tip"></span>
           </div>
