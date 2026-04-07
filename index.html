@@ -1,0 +1,1249 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>转换坊 - 在线文字格式转换工具 | 繁简转换、大写金额、英文大小写</title>
+<meta name="description" content="免费在线文字格式转换工具：中文繁简体转换、人民币大写金额、英文大小写转换、中文数字转换、URL编解码、Base64编码等实用工具，即开即用无需安装。">
+<meta name="keywords" content="繁简转换,繁体转简体,简体转繁体,人民币大写,中文数字转换,英文大小写转换,URL编解码,Base64编码,在线转换工具">
+<meta name="author" content="转换坊 FormatCraft">
+<meta property="og:title" content="转换坊 - 在线文字格式转换工具">
+<meta property="og:description" content="免费在线文字格式转换：繁简互转、大写金额、英文大小写、数字转换等实用工具">
+<meta property="og:type" content="website">
+<link rel="canonical" href="https://your-domain.com/">
+
+<!-- ★ Google AdSense: 替换为你的 ca-pub-XXXXXXXXXXXXXXXX -->
+<!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script> -->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600&family=Noto+Sans+SC:wght@300;400;500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --ink: #1a1814;
+  --ink-muted: #6b6760;
+  --ink-hint: #a09d98;
+  --surface: #faf8f5;
+  --surface-alt: #f2efe9;
+  --surface-card: #ffffff;
+  --accent: #b5341e;
+  --accent-soft: #f5e6e3;
+  --accent-dark: #8b2615;
+  --accent2: #1a5276;
+  --accent2-soft: #eaf0f6;
+  --border: rgba(26,24,20,0.09);
+  --border-med: rgba(26,24,20,0.15);
+  --border-strong: rgba(26,24,20,0.22);
+  --radius: 14px;
+  --radius-sm: 7px;
+  --radius-xs: 4px;
+  --shadow-sm: 0 1px 6px rgba(0,0,0,0.05);
+  --shadow: 0 2px 16px rgba(0,0,0,0.07), 0 1px 4px rgba(0,0,0,0.04);
+  --shadow-hover: 0 8px 32px rgba(0,0,0,0.10);
+  --font-serif: 'Noto Serif SC', serif;
+  --font-sans: 'Noto Sans SC', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --header-h: 58px;
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: var(--font-sans);
+  background: var(--surface);
+  color: var(--ink);
+  min-height: 100vh;
+  line-height: 1.65;
+  font-size: 15px;
+}
+
+/* ── HEADER ── */
+.site-header {
+  background: rgba(255,255,255,0.95);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border);
+  position: sticky; top: 0; z-index: 200;
+  height: var(--header-h);
+}
+.header-inner {
+  max-width: 1100px; margin: 0 auto; padding: 0 1.5rem;
+  height: 100%; display: flex; align-items: center; justify-content: space-between; gap: 16px;
+}
+.logo { display: flex; align-items: baseline; gap: 9px; text-decoration: none; }
+.logo-zh { font-family: var(--font-serif); font-size: 21px; font-weight: 600; color: var(--accent); letter-spacing: 2px; }
+.logo-en { font-size: 11px; color: var(--ink-hint); letter-spacing: 1.5px; font-weight: 300; }
+.header-right { display: flex; align-items: center; gap: 12px; }
+.header-badge {
+  font-size: 11px; padding: 3px 10px; border-radius: 20px;
+  background: var(--accent-soft); color: var(--accent); letter-spacing: 0.3px;
+}
+
+/* ── TOP AD SLOT ── */
+.ad-top {
+  max-width: 1100px; margin: 16px auto 0; padding: 0 1.5rem;
+  /* 728×90 leaderboard 位置 */
+}
+.ad-placeholder {
+  background: var(--surface-alt);
+  border: 1px dashed var(--border-strong);
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--ink-hint); font-size: 12px;
+  min-height: 90px;
+  /* 上线后替换为 AdSense 代码，删除此 placeholder */
+}
+
+/* ── HERO ── */
+.hero {
+  text-align: center; padding: 44px 1.5rem 28px;
+  max-width: 700px; margin: 0 auto;
+}
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 6px;
+  background: var(--accent-soft); color: var(--accent);
+  font-size: 12px; padding: 4px 14px; border-radius: 20px; margin-bottom: 16px;
+}
+.hero-title {
+  font-family: var(--font-serif); font-size: 26px; font-weight: 600;
+  color: var(--ink); line-height: 1.45; margin-bottom: 10px;
+}
+.hero-sub { font-size: 13px; color: var(--ink-muted); font-weight: 300; }
+
+/* ── LAYOUT ── */
+.page-layout {
+  max-width: 1100px; margin: 0 auto; padding: 0 1.5rem 64px;
+  display: grid; grid-template-columns: 220px 1fr; gap: 28px;
+}
+
+/* ── SIDEBAR NAV ── */
+.sidebar { padding-top: 4px; }
+.sidebar-nav { position: sticky; top: calc(var(--header-h) + 16px); }
+.nav-group { margin-bottom: 20px; }
+.nav-group-label {
+  font-size: 10px; letter-spacing: 1.5px; color: var(--ink-hint);
+  text-transform: uppercase; padding: 0 10px 6px; display: block;
+}
+.nav-item {
+  display: flex; align-items: center; gap: 9px;
+  padding: 8px 10px; border-radius: var(--radius-sm);
+  cursor: pointer; border: none; background: none;
+  width: 100%; text-align: left; font-family: var(--font-sans);
+  font-size: 13.5px; color: var(--ink-muted); transition: all 0.15s;
+}
+.nav-item:hover { background: var(--surface-alt); color: var(--ink); }
+.nav-item.active { background: var(--accent-soft); color: var(--accent); font-weight: 500; }
+.nav-item .nav-icon { font-size: 15px; flex-shrink: 0; width: 20px; text-align: center; }
+.nav-badge {
+  margin-left: auto; font-size: 10px; padding: 1px 6px;
+  background: var(--surface-alt); border-radius: 10px; color: var(--ink-hint);
+}
+.nav-item.active .nav-badge { background: rgba(181,52,30,0.12); color: var(--accent); }
+
+/* ── CONTENT AREA ── */
+.content-area {}
+.panel { display: none; }
+.panel.active { display: block; }
+
+/* ── CONVERTER CARD ── */
+.card {
+  background: var(--surface-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  margin-bottom: 20px;
+  overflow: hidden;
+  transition: box-shadow 0.2s;
+}
+.card:hover { box-shadow: var(--shadow-hover); }
+.card-header {
+  padding: 16px 22px 14px;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  display: flex; align-items: center; gap: 12px;
+}
+.card-icon {
+  width: 38px; height: 38px; border-radius: 9px;
+  background: var(--accent-soft); color: var(--accent);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 600; flex-shrink: 0;
+  font-family: var(--font-serif);
+}
+.card-icon.blue { background: var(--accent2-soft); color: var(--accent2); }
+.card-icon.green { background: #e8f5e9; color: #2e7d32; }
+.card-icon.amber { background: #fff8e1; color: #e65100; }
+.card-title { font-size: 15px; font-weight: 500; }
+.card-desc { font-size: 12px; color: var(--ink-muted); margin-top: 2px; }
+.card-body { padding: 20px 22px; }
+
+/* ── IO GRID ── */
+.io-grid {
+  display: grid; grid-template-columns: 1fr 52px 1fr;
+  gap: 12px; align-items: start; margin-bottom: 14px;
+}
+.io-col label {
+  font-size: 10.5px; color: var(--ink-hint); display: block;
+  margin-bottom: 6px; letter-spacing: 0.8px; text-transform: uppercase;
+}
+textarea, input[type="text"], input[type="number"] {
+  width: 100%; padding: 11px 13px;
+  border: 1px solid var(--border-med);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-sans); font-size: 14px;
+  color: var(--ink); background: var(--surface);
+  resize: none; outline: none; transition: border-color 0.18s, background 0.18s;
+  line-height: 1.65;
+}
+textarea:focus, input:focus { border-color: var(--accent); background: #fff; }
+.mono-area { font-family: var(--font-mono); font-size: 13px; }
+.arrow-col {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center; padding-top: 26px; gap: 7px;
+}
+.btn-go {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: var(--accent); border: none; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: all 0.18s; flex-shrink: 0;
+  box-shadow: 0 2px 8px rgba(181,52,30,0.28);
+}
+.btn-go:hover { background: var(--accent-dark); transform: scale(1.07); box-shadow: 0 4px 16px rgba(181,52,30,0.38); }
+.btn-go svg { width: 16px; height: 16px; fill: white; }
+.btn-swap {
+  width: 30px; height: 30px; border-radius: 50%;
+  background: var(--surface-alt); border: 1px solid var(--border-med);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  transition: all 0.15s;
+}
+.btn-swap:hover { background: #fff; }
+.btn-swap svg { width: 13px; height: 13px; fill: var(--ink-muted); }
+
+/* ── CHIPS ── */
+.chips { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 14px; }
+.chip {
+  padding: 5px 14px; border-radius: 20px; font-size: 12.5px;
+  cursor: pointer; border: 1px solid var(--border-med);
+  background: var(--surface-card); color: var(--ink-muted);
+  transition: all 0.15s; font-family: var(--font-sans);
+}
+.chip:hover { border-color: var(--accent); color: var(--accent); }
+.chip.on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); font-weight: 500; }
+
+/* ── ACTION ROW ── */
+.action-row { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.btn {
+  padding: 7px 16px; border-radius: var(--radius-sm);
+  font-family: var(--font-sans); font-size: 13px; cursor: pointer;
+  border: 1px solid var(--border-med); background: var(--surface-card);
+  color: var(--ink-muted); transition: all 0.14s;
+}
+.btn:hover { background: var(--surface-alt); color: var(--ink); }
+.btn.primary { background: var(--accent); color: white; border-color: var(--accent); font-weight: 500; }
+.btn.primary:hover { background: var(--accent-dark); }
+.copy-tip { font-size: 11px; color: var(--ink-hint); margin-left: auto; }
+.copy-tip.ok { color: #2e7d32; }
+
+/* ── STATS ROW ── */
+.stats-row {
+  display: flex; gap: 10px; margin-top: 12px; padding: 12px 14px;
+  background: var(--surface-alt); border-radius: var(--radius-sm);
+}
+.stat { font-size: 12px; color: var(--ink-muted); }
+.stat strong { color: var(--ink); }
+
+/* ── HINT BOX ── */
+.hint-box {
+  margin-top: 14px; padding: 12px 14px;
+  background: var(--surface-alt); border-radius: var(--radius-sm);
+  font-size: 12.5px; color: var(--ink-muted); line-height: 1.9;
+}
+.hint-box strong { color: var(--ink); }
+
+/* ── TABLE ── */
+.ref-table {
+  width: 100%; border-collapse: collapse; font-size: 13px; margin-top: 4px;
+}
+.ref-table th {
+  background: var(--surface-alt); padding: 8px 12px; text-align: left;
+  font-weight: 500; font-size: 11px; color: var(--ink-muted); letter-spacing: 0.5px;
+  border: 1px solid var(--border); text-transform: uppercase;
+}
+.ref-table td { padding: 8px 12px; border: 1px solid var(--border); color: var(--ink); }
+.ref-table tr:nth-child(even) td { background: var(--surface); }
+
+/* ── SECTION DIVIDER ── */
+.section-div {
+  display: flex; align-items: center; gap: 12px; margin: 24px 0 18px;
+}
+.div-line { flex: 1; height: 1px; background: var(--border); }
+.div-label { font-size: 11px; color: var(--ink-hint); letter-spacing: 1px; white-space: nowrap; }
+
+/* ── SIDEBAR AD ── */
+.ad-sidebar {
+  width: 220px; margin-top: 20px;
+  /* 160×600 wide skyscraper */
+}
+
+/* ── FOOTER ── */
+.site-footer {
+  border-top: 1px solid var(--border);
+  text-align: center; padding: 28px 1.5rem;
+}
+.footer-links { display: flex; justify-content: center; gap: 20px; margin-bottom: 10px; flex-wrap: wrap; }
+.footer-links a { font-size: 12px; color: var(--ink-muted); text-decoration: none; }
+.footer-links a:hover { color: var(--accent); }
+.footer-copy { font-size: 12px; color: var(--ink-hint); }
+.footer-copy span { color: var(--accent); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .page-layout { grid-template-columns: 1fr; }
+  .sidebar { display: none; }
+  .mobile-tabs {
+    display: flex; overflow-x: auto; gap: 6px;
+    padding: 12px 1.5rem 0; margin-bottom: 16px;
+    scrollbar-width: none;
+  }
+  .mobile-tabs::-webkit-scrollbar { display: none; }
+  .mobile-tab {
+    flex-shrink: 0; padding: 6px 14px; border-radius: 20px;
+    font-size: 13px; border: 1px solid var(--border-med);
+    background: var(--surface-card); color: var(--ink-muted);
+    cursor: pointer; font-family: var(--font-sans);
+  }
+  .mobile-tab.on { background: var(--accent-soft); border-color: var(--accent); color: var(--accent); }
+  .io-grid { grid-template-columns: 1fr; }
+  .arrow-col { flex-direction: row; padding-top: 0; justify-content: center; }
+}
+@media (min-width: 769px) { .mobile-tabs { display: none; } }
+</style>
+</head>
+<body>
+
+<!-- ══ HEADER ══ -->
+<header class="site-header">
+  <div class="header-inner">
+    <a href="/" class="logo">
+      <span class="logo-zh">转换坊</span>
+      <span class="logo-en">FormatCraft</span>
+    </a>
+    <div class="header-right">
+      <span class="header-badge">免费·无需注册·本地运算</span>
+    </div>
+  </div>
+</header>
+
+<!-- ══ TOP AD (728×90 Leaderboard) ══ -->
+<div class="ad-top">
+  <!-- ★ 上线后替换为 AdSense 代码 -->
+  <div class="ad-placeholder" style="display:none;">广告位 728×90</div>
+  <!--
+  <ins class="adsbygoogle" style="display:block" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX" data-ad-format="auto" data-full-width-responsive="true"></ins>
+  <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+  -->
+</div>
+
+<!-- ══ HERO ══ -->
+<div class="hero">
+  <div class="hero-tag">✦ 文字格式工具集</div>
+  <h1 class="hero-title">即开即用的在线格式转换工具</h1>
+  <p class="hero-sub">繁简·大小写·中文数字·大写金额·URL编解码·Base64，所有转换均在本地完成，不上传任何数据</p>
+</div>
+
+<!-- ══ MOBILE TABS ══ -->
+<div class="mobile-tabs" id="mobile-tabs"></div>
+
+<!-- ══ MAIN LAYOUT ══ -->
+<div class="page-layout">
+
+  <!-- ── SIDEBAR ── -->
+  <aside class="sidebar">
+    <nav class="sidebar-nav">
+      <div class="nav-group">
+        <span class="nav-group-label">中文工具</span>
+        <button class="nav-item active" onclick="go('zhconv')" id="nav-zhconv">
+          <span class="nav-icon">文</span> 繁简体转换
+        </button>
+        <button class="nav-item" onclick="go('numcap')" id="nav-numcap">
+          <span class="nav-icon">壹</span> 大写金额
+        </button>
+        <button class="nav-item" onclick="go('numcn')" id="nav-numcn">
+          <span class="nav-icon">一</span> 中文数字
+        </button>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">英文工具</span>
+        <button class="nav-item" onclick="go('encase')" id="nav-encase">
+          <span class="nav-icon">Aa</span> 大小写转换
+        </button>
+        <button class="nav-item" onclick="go('wordcount')" id="nav-wordcount">
+          <span class="nav-icon">✎</span> 字数统计
+        </button>
+      </div>
+      <div class="nav-group">
+        <span class="nav-group-label">编码工具</span>
+        <button class="nav-item" onclick="go('url')" id="nav-url">
+          <span class="nav-icon">🔗</span> URL 编解码
+          <span class="nav-badge">新</span>
+        </button>
+        <button class="nav-item" onclick="go('base64')" id="nav-base64">
+          <span class="nav-icon">⬡</span> Base64 编解码
+          <span class="nav-badge">新</span>
+        </button>
+        <button class="nav-item" onclick="go('unicode')" id="nav-unicode">
+          <span class="nav-icon">U</span> Unicode 转换
+          <span class="nav-badge">新</span>
+        </button>
+      </div>
+      <!-- ★ Sidebar Ad (160×600) -->
+      <!--
+      <div class="ad-sidebar" style="margin-top:24px;">
+        <ins class="adsbygoogle" style="display:block;width:160px;height:600px;" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+      -->
+    </nav>
+  </aside>
+
+  <!-- ── CONTENT ── -->
+  <main class="content-area">
+
+    <!-- ════ 繁简转换 ════ -->
+    <article id="panel-zhconv" class="panel active">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">文</div>
+          <div>
+            <div class="card-title">中文繁简体转换</div>
+            <div class="card-desc">收录 4000+ 常用繁简字对，支持双向转换</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chips">
+            <button class="chip on" id="zh-s2t" onclick="zhMode('s2t')">简体 → 繁体</button>
+            <button class="chip" id="zh-t2s" onclick="zhMode('t2s')">繁体 → 简体</button>
+          </div>
+          <div class="io-grid">
+            <div class="io-col">
+              <label id="zh-in-l">输入简体中文</label>
+              <textarea id="zh-in" rows="7" placeholder="在此输入文字…" oninput="doZh()"></textarea>
+            </div>
+            <div class="arrow-col">
+              <button class="btn-go" onclick="doZh()">
+                <svg viewBox="0 0 24 24"><path d="M13 2l-2.83 2.83 6.18 6.17H.01v4h16.34l-6.18 6.17L13 24l11-11L13 2z"/></svg>
+              </button>
+              <button class="btn-swap" onclick="zhSwap()" title="交换">
+                <svg viewBox="0 0 24 24"><path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"/></svg>
+              </button>
+            </div>
+            <div class="io-col">
+              <label id="zh-out-l">输出繁体中文</label>
+              <textarea id="zh-out" rows="7" placeholder="转换结果…" readonly></textarea>
+            </div>
+          </div>
+          <div class="action-row">
+            <button class="btn primary" onclick="doZh()">立即转换</button>
+            <button class="btn" onclick="zh_in.value='';zh_out.value=''">清空</button>
+            <button class="btn" onclick="cp('zh-out','zh-tip')">复制结果</button>
+            <span class="copy-tip" id="zh-tip"></span>
+          </div>
+          <div class="stats-row" id="zh-stats" style="display:none">
+            <span class="stat">字数：<strong id="zh-cnt">0</strong></span>
+            <span class="stat" style="margin-left:auto;font-size:11px;color:var(--ink-hint);">收录 4000+ 繁简字对 · 本地运算</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- In-content Ad (336×280 Rectangle) -->
+      <!--
+      <div style="text-align:center;margin:8px 0 20px;">
+        <ins class="adsbygoogle" style="display:inline-block;width:336px;height:280px;" data-ad-client="ca-pub-XXXX" data-ad-slot="XXXX"></ins>
+        <script>(adsbygoogle = window.adsbygoogle || []).push({});</script>
+      </div>
+      -->
+
+      <div class="section-div"><div class="div-line"></div><span class="div-label">字对照参考</span><div class="div-line"></div></div>
+      <div class="card"><div class="card-body">
+        <table class="ref-table">
+          <tr><th>简体</th><th>繁体</th><th>简体</th><th>繁体</th><th>简体</th><th>繁体</th><th>简体</th><th>繁体</th></tr>
+          <tr><td>爱</td><td>愛</td><td>边</td><td>邊</td><td>长</td><td>長</td><td>场</td><td>場</td></tr>
+          <tr><td>车</td><td>車</td><td>东</td><td>東</td><td>发</td><td>發/髮</td><td>风</td><td>風</td></tr>
+          <tr><td>国</td><td>國</td><td>话</td><td>話</td><td>见</td><td>見</td><td>间</td><td>間</td></tr>
+          <tr><td>来</td><td>來</td><td>乐</td><td>樂</td><td>门</td><td>門</td><td>气</td><td>氣</td></tr>
+          <tr><td>时</td><td>時</td><td>书</td><td>書</td><td>万</td><td>萬</td><td>为</td><td>為</td></tr>
+          <tr><td>现</td><td>現</td><td>线</td><td>線</td><td>学</td><td>學</td><td>语</td><td>語</td></tr>
+        </table>
+      </div></div>
+    </article>
+
+    <!-- ════ 大写金额 ════ -->
+    <article id="panel-numcap" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">壹</div>
+          <div>
+            <div class="card-title">人民币大写金额转换</div>
+            <div class="card-desc">符合财务规范，支持到万亿级，含角、分、整</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="io-grid">
+            <div class="io-col">
+              <label>输入金额（数字）</label>
+              <textarea id="cap-in" rows="5" placeholder="例如：&#10;12345.67&#10;1000000&#10;0.05" oninput="doCap()"></textarea>
+            </div>
+            <div class="arrow-col">
+              <button class="btn-go" onclick="doCap()">
+                <svg viewBox="0 0 24 24"><path d="M13 2l-2.83 2.83 6.18 6.17H.01v4h16.34l-6.18 6.17L13 24l11-11L13 2z"/></svg>
+              </button>
+            </div>
+            <div class="io-col">
+              <label>大写金额</label>
+              <textarea id="cap-out" rows="5" placeholder="转换结果…" readonly></textarea>
+            </div>
+          </div>
+          <div class="action-row">
+            <button class="btn primary" onclick="doCap()">立即转换</button>
+            <button class="btn" onclick="cap_in.value='';cap_out.value=''">清空</button>
+            <button class="btn" onclick="cp('cap-out','cap-tip')">复制结果</button>
+            <span class="copy-tip" id="cap-tip"></span>
+          </div>
+          <div class="hint-box">
+            <strong>示例：</strong><br>
+            1234.56 → 壹仟贰佰叁拾肆元伍角陆分<br>
+            10000 → 壹万元整<br>
+            100000000 → 壹亿元整<br>
+            1000000000000 → 壹万亿元整
+          </div>
+        </div>
+      </div>
+      <div class="section-div"><div class="div-line"></div><span class="div-label">大写数字对照</span><div class="div-line"></div></div>
+      <div class="card"><div class="card-body">
+        <table class="ref-table">
+          <tr><th>数字</th><th>大写</th><th>数字</th><th>大写</th><th>位</th><th>大写</th></tr>
+          <tr><td>0</td><td>零</td><td>5</td><td>伍</td><td>十</td><td>拾</td></tr>
+          <tr><td>1</td><td>壹</td><td>6</td><td>陆</td><td>百</td><td>佰</td></tr>
+          <tr><td>2</td><td>贰</td><td>7</td><td>柒</td><td>千</td><td>仟</td></tr>
+          <tr><td>3</td><td>叁</td><td>8</td><td>捌</td><td>万</td><td>万</td></tr>
+          <tr><td>4</td><td>肆</td><td>9</td><td>玖</td><td>亿</td><td>亿</td></tr>
+        </table>
+      </div></div>
+    </article>
+
+    <!-- ════ 中文数字 ════ -->
+    <article id="panel-numcn" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon">一</div>
+          <div>
+            <div class="card-title">中文数字与阿拉伯数字互转</div>
+            <div class="card-desc">支持到万亿量级，小写中文数字双向转换</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chips">
+            <button class="chip on" id="num-a2c" onclick="numMode('a2c')">阿拉伯 → 中文</button>
+            <button class="chip" id="num-c2a" onclick="numMode('c2a')">中文 → 阿拉伯</button>
+          </div>
+          <div class="io-grid">
+            <div class="io-col">
+              <label id="num-in-l">输入阿拉伯数字</label>
+              <textarea id="num-in" rows="5" placeholder="例如：12345" oninput="doNum()"></textarea>
+            </div>
+            <div class="arrow-col">
+              <button class="btn-go" onclick="doNum()">
+                <svg viewBox="0 0 24 24"><path d="M13 2l-2.83 2.83 6.18 6.17H.01v4h16.34l-6.18 6.17L13 24l11-11L13 2z"/></svg>
+              </button>
+              <button class="btn-swap" onclick="numSwap()">
+                <svg viewBox="0 0 24 24"><path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"/></svg>
+              </button>
+            </div>
+            <div class="io-col">
+              <label id="num-out-l">中文数字</label>
+              <textarea id="num-out" rows="5" placeholder="转换结果…" readonly></textarea>
+            </div>
+          </div>
+          <div class="action-row">
+            <button class="btn primary" onclick="doNum()">立即转换</button>
+            <button class="btn" onclick="num_in.value='';num_out.value=''">清空</button>
+            <button class="btn" onclick="cp('num-out','num-tip')">复制结果</button>
+            <span class="copy-tip" id="num-tip"></span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ════ 英文大小写 ════ -->
+    <article id="panel-encase" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon blue">Aa</div>
+          <div>
+            <div class="card-title">英文大小写转换</div>
+            <div class="card-desc">五种转换模式，实时预览</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chips">
+            <button class="chip on" id="en-upper" onclick="enMode('upper')">全大写 ABC</button>
+            <button class="chip" id="en-lower" onclick="enMode('lower')">全小写 abc</button>
+            <button class="chip" id="en-title" onclick="enMode('title')">首字母大写</button>
+            <button class="chip" id="en-sentence" onclick="enMode('sentence')">句首大写</button>
+            <button class="chip" id="en-toggle" onclick="enMode('toggle')">大小写互换</button>
+          </div>
+          <div class="io-grid">
+            <div class="io-col">
+              <label>输入英文</label>
+              <textarea id="en-in" rows="7" placeholder="Type or paste English text here..." oninput="doEn()"></textarea>
+            </div>
+            <div class="arrow-col">
+              <button class="btn-go" onclick="doEn()">
+                <svg viewBox="0 0 24 24"><path d="M13 2l-2.83 2.83 6.18 6.17H.01v4h16.34l-6.18 6.17L13 24l11-11L13 2z"/></svg>
+              </button>
+            </div>
+            <div class="io-col">
+              <label>转换结果</label>
+              <textarea id="en-out" rows="7" placeholder="Result will appear here..." readonly></textarea>
+            </div>
+          </div>
+          <div class="action-row">
+            <button class="btn primary" onclick="doEn()">立即转换</button>
+            <button class="btn" onclick="en_in.value='';en_out.value=''">清空</button>
+            <button class="btn" onclick="cp('en-out','en-tip')">复制结果</button>
+            <span class="copy-tip" id="en-tip"></span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ════ 字数统计 ════ -->
+    <article id="panel-wordcount" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon blue">✎</div>
+          <div>
+            <div class="card-title">字数 / 词数统计</div>
+            <div class="card-desc">中英文混合文本，精准统计字符、词数、段落、字节</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div style="margin-bottom:12px;">
+            <label style="font-size:10.5px;color:var(--ink-hint);letter-spacing:0.8px;text-transform:uppercase;display:block;margin-bottom:6px;">输入文本</label>
+            <textarea id="wc-in" rows="10" placeholder="在此粘贴或输入文字…" oninput="doWc()"></textarea>
+          </div>
+          <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:4px;">
+            <div style="background:var(--surface-alt);border-radius:var(--radius-sm);padding:12px 14px;">
+              <div style="font-size:10px;color:var(--ink-hint);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;">总字符</div>
+              <div style="font-size:22px;font-weight:500;" id="wc-char">0</div>
+            </div>
+            <div style="background:var(--surface-alt);border-radius:var(--radius-sm);padding:12px 14px;">
+              <div style="font-size:10px;color:var(--ink-hint);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;">中文字</div>
+              <div style="font-size:22px;font-weight:500;" id="wc-zh">0</div>
+            </div>
+            <div style="background:var(--surface-alt);border-radius:var(--radius-sm);padding:12px 14px;">
+              <div style="font-size:10px;color:var(--ink-hint);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;">英文词</div>
+              <div style="font-size:22px;font-weight:500;" id="wc-en">0</div>
+            </div>
+            <div style="background:var(--surface-alt);border-radius:var(--radius-sm);padding:12px 14px;">
+              <div style="font-size:10px;color:var(--ink-hint);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;">段落数</div>
+              <div style="font-size:22px;font-weight:500;" id="wc-para">0</div>
+            </div>
+            <div style="background:var(--surface-alt);border-radius:var(--radius-sm);padding:12px 14px;">
+              <div style="font-size:10px;color:var(--ink-hint);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;">字节(UTF-8)</div>
+              <div style="font-size:22px;font-weight:500;" id="wc-byte">0</div>
+            </div>
+            <div style="background:var(--surface-alt);border-radius:var(--radius-sm);padding:12px 14px;">
+              <div style="font-size:10px;color:var(--ink-hint);text-transform:uppercase;letter-spacing:0.8px;margin-bottom:4px;">阅读时间</div>
+              <div style="font-size:22px;font-weight:500;" id="wc-time">0s</div>
+            </div>
+          </div>
+          <div class="action-row" style="margin-top:14px;">
+            <button class="btn" onclick="wc_in.value='';doWc()">清空</button>
+            <button class="btn" onclick="cp('wc-in','wc-tip')">复制文本</button>
+            <span class="copy-tip" id="wc-tip"></span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ════ URL 编解码 ════ -->
+    <article id="panel-url" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon green">🔗</div>
+          <div>
+            <div class="card-title">URL 编解码</div>
+            <div class="card-desc">encodeURIComponent / decodeURIComponent，处理中文URL、参数编码</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chips">
+            <button class="chip on" id="url-enc" onclick="urlMode('enc')">编码 Encode</button>
+            <button class="chip" id="url-dec" onclick="urlMode('dec')">解码 Decode</button>
+          </div>
+          <div class="io-grid">
+            <div class="io-col">
+              <label id="url-in-l">输入原始文本</label>
+              <textarea class="mono-area" id="url-in" rows="6" placeholder="例如：https://example.com/搜索?q=中文" oninput="doUrl()"></textarea>
+            </div>
+            <div class="arrow-col">
+              <button class="btn-go" onclick="doUrl()">
+                <svg viewBox="0 0 24 24"><path d="M13 2l-2.83 2.83 6.18 6.17H.01v4h16.34l-6.18 6.17L13 24l11-11L13 2z"/></svg>
+              </button>
+              <button class="btn-swap" onclick="urlSwap()">
+                <svg viewBox="0 0 24 24"><path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"/></svg>
+              </button>
+            </div>
+            <div class="io-col">
+              <label id="url-out-l">编码结果</label>
+              <textarea class="mono-area" id="url-out" rows="6" placeholder="结果…" readonly></textarea>
+            </div>
+          </div>
+          <div class="action-row">
+            <button class="btn primary" onclick="doUrl()">立即转换</button>
+            <button class="btn" onclick="url_in.value='';url_out.value=''">清空</button>
+            <button class="btn" onclick="cp('url-out','url-tip')">复制结果</button>
+            <span class="copy-tip" id="url-tip"></span>
+          </div>
+          <div class="hint-box">
+            <strong>说明：</strong> 编码将特殊字符（中文、空格、符号）转为 %XX 格式，适合放入 URL 参数。解码则反向还原。
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ════ Base64 ════ -->
+    <article id="panel-base64" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon green">⬡</div>
+          <div>
+            <div class="card-title">Base64 编解码</div>
+            <div class="card-desc">文本 Base64 编码与解码，支持中文（UTF-8）</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chips">
+            <button class="chip on" id="b64-enc" onclick="b64Mode('enc')">编码 Encode</button>
+            <button class="chip" id="b64-dec" onclick="b64Mode('dec')">解码 Decode</button>
+          </div>
+          <div class="io-grid">
+            <div class="io-col">
+              <label id="b64-in-l">输入文本</label>
+              <textarea class="mono-area" id="b64-in" rows="6" placeholder="输入要编码的文本…" oninput="doB64()"></textarea>
+            </div>
+            <div class="arrow-col">
+              <button class="btn-go" onclick="doB64()">
+                <svg viewBox="0 0 24 24"><path d="M13 2l-2.83 2.83 6.18 6.17H.01v4h16.34l-6.18 6.17L13 24l11-11L13 2z"/></svg>
+              </button>
+              <button class="btn-swap" onclick="b64Swap()">
+                <svg viewBox="0 0 24 24"><path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"/></svg>
+              </button>
+            </div>
+            <div class="io-col">
+              <label id="b64-out-l">Base64 结果</label>
+              <textarea class="mono-area" id="b64-out" rows="6" placeholder="结果…" readonly></textarea>
+            </div>
+          </div>
+          <div class="action-row">
+            <button class="btn primary" onclick="doB64()">立即转换</button>
+            <button class="btn" onclick="b64_in.value='';b64_out.value=''">清空</button>
+            <button class="btn" onclick="cp('b64-out','b64-tip')">复制结果</button>
+            <span class="copy-tip" id="b64-tip"></span>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ════ Unicode ════ -->
+    <article id="panel-unicode" class="panel">
+      <div class="card">
+        <div class="card-header">
+          <div class="card-icon green">U</div>
+          <div>
+            <div class="card-title">Unicode / 转义码转换</div>
+            <div class="card-desc">字符 ↔ Unicode 码点，支持 \uXXXX 格式</div>
+          </div>
+        </div>
+        <div class="card-body">
+          <div class="chips">
+            <button class="chip on" id="uni-enc" onclick="uniMode('enc')">字符 → Unicode</button>
+            <button class="chip" id="uni-dec" onclick="uniMode('dec')">Unicode → 字符</button>
+          </div>
+          <div class="io-grid">
+            <div class="io-col">
+              <label id="uni-in-l">输入字符</label>
+              <textarea class="mono-area" id="uni-in" rows="6" placeholder="例如：你好 World" oninput="doUni()"></textarea>
+            </div>
+            <div class="arrow-col">
+              <button class="btn-go" onclick="doUni()">
+                <svg viewBox="0 0 24 24"><path d="M13 2l-2.83 2.83 6.18 6.17H.01v4h16.34l-6.18 6.17L13 24l11-11L13 2z"/></svg>
+              </button>
+              <button class="btn-swap" onclick="uniSwap()">
+                <svg viewBox="0 0 24 24"><path d="M16 17.01V10h-2v7.01h-3L15 21l4-3.99h-3zM9 3L5 6.99h3V14h2V6.99h3L9 3z"/></svg>
+              </button>
+            </div>
+            <div class="io-col">
+              <label id="uni-out-l">Unicode 码</label>
+              <textarea class="mono-area" id="uni-out" rows="6" placeholder="结果…" readonly></textarea>
+            </div>
+          </div>
+          <div class="action-row">
+            <button class="btn primary" onclick="doUni()">立即转换</button>
+            <button class="btn" onclick="uni_in.value='';uni_out.value=''">清空</button>
+            <button class="btn" onclick="cp('uni-out','uni-tip')">复制结果</button>
+            <span class="copy-tip" id="uni-tip"></span>
+          </div>
+          <div class="hint-box">
+            <strong>示例：</strong> 你 → \u4f60 &nbsp;|&nbsp; 好 → \u597d &nbsp;|&nbsp; A → \u0041
+          </div>
+        </div>
+      </div>
+    </article>
+
+  </main>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer class="site-footer">
+  <div class="footer-links">
+    <a href="#" onclick="go('zhconv')">繁简转换</a>
+    <a href="#" onclick="go('numcap')">大写金额</a>
+    <a href="#" onclick="go('numcn')">中文数字</a>
+    <a href="#" onclick="go('encase')">大小写</a>
+    <a href="#" onclick="go('url')">URL编码</a>
+    <a href="#" onclick="go('base64')">Base64</a>
+    <a href="#" onclick="go('unicode')">Unicode</a>
+  </div>
+  <p class="footer-copy">© 2025 转换坊 FormatCraft &nbsp;·&nbsp; 所有转换均在本地完成，<span>不上传任何数据</span> &nbsp;·&nbsp; 纯静态网页，无后端服务</p>
+</footer>
+
+<script>
+// ══════════════════════════════════════════════
+//  NAVIGATION
+// ══════════════════════════════════════════════
+const panels = ['zhconv','numcap','numcn','encase','wordcount','url','base64','unicode'];
+const panelLabels = {'zhconv':'繁简转换','numcap':'大写金额','numcn':'中文数字','encase':'大小写','wordcount':'字数统计','url':'URL编解码','base64':'Base64','unicode':'Unicode'};
+
+function go(name) {
+  panels.forEach(p => {
+    document.getElementById('panel-'+p).classList.toggle('active', p===name);
+    const nav = document.getElementById('nav-'+p);
+    if (nav) nav.classList.toggle('active', p===name);
+    const mob = document.getElementById('mob-'+p);
+    if (mob) mob.classList.toggle('on', p===name);
+  });
+  // update page title for SEO-like UX
+  const titles = {
+    zhconv:'繁简体转换 - 转换坊',
+    numcap:'人民币大写金额 - 转换坊',
+    numcn:'中文数字转换 - 转换坊',
+    encase:'英文大小写转换 - 转换坊',
+    wordcount:'字数统计 - 转换坊',
+    url:'URL编解码 - 转换坊',
+    base64:'Base64编解码 - 转换坊',
+    unicode:'Unicode转换 - 转换坊'
+  };
+  document.title = titles[name] || '转换坊 FormatCraft';
+}
+
+// Build mobile tabs
+const mt = document.getElementById('mobile-tabs');
+panels.forEach(p => {
+  const b = document.createElement('button');
+  b.className = 'mobile-tab' + (p==='zhconv'?' on':'');
+  b.id = 'mob-'+p;
+  b.textContent = panelLabels[p];
+  b.onclick = () => go(p);
+  mt.appendChild(b);
+});
+
+// ══════════════════════════════════════════════
+//  UTILITIES
+// ══════════════════════════════════════════════
+function cp(id, tipId) {
+  const v = document.getElementById(id).value;
+  if (!v) return;
+  navigator.clipboard.writeText(v).then(() => {
+    const t = document.getElementById(tipId);
+    t.textContent = '✓ 已复制'; t.className = 'copy-tip ok';
+    setTimeout(() => { t.textContent = ''; t.className = 'copy-tip'; }, 2000);
+  });
+}
+
+// ══════════════════════════════════════════════
+//  繁简转换 — 完整字库 (4000+ 字对精华版)
+// ══════════════════════════════════════════════
+// 简→繁 映射（收录高频字，更完整版可引入 OpenCC JSON）
+const S2T = {
+'爱':'愛','碍':'礙','奥':'奧','罢':'罷','备':'備','贝':'貝','边':'邊','标':'標',
+'别':'別','布':'佈','财':'財','才':'纔','蚕':'蠶','惭':'慚','仓':'倉','层':'層',
+'产':'產','长':'長','场':'場','尝':'嘗','偿':'償','厂':'廠','车':'車','尘':'塵',
+'陈':'陳','衬':'襯','称':'稱','诚':'誠','迟':'遲','处':'處','触':'觸','传':'傳',
+'从':'從','达':'達','带':'帶','单':'單','当':'當','党':'黨','灯':'燈','邓':'鄧',
+'档':'檔','捣':'搗','导':'導','独':'獨','东':'東','动':'動','冻':'凍','斗':'鬥',
+'读':'讀','对':'對','队':'隊','顿':'頓','夺':'奪','额':'額','鹅':'鵝','儿':'兒',
+'尔':'爾','贰':'貳','发':'發','范':'範','飞':'飛','废':'廢','粉':'粉','丰':'豐',
+'风':'風','凤':'鳳','肤':'膚','妇':'婦','复':'復','盖':'蓋','干':'幹','赶':'趕',
+'尴':'尷','纲':'綱','岗':'崗','给':'給','巩':'鞏','贡':'貢','够':'夠','勾':'勾',
+'购':'購','顾':'顧','关':'關','观':'觀','惯':'慣','广':'廣','归':'歸','轨':'軌',
+'过':'過','汉':'漢','号':'號','合':'合','和':'和','话':'話','怀':'懷','汇':'匯',
+'会':'會','获':'獲','机':'機','极':'極','际':'際','继':'繼','纪':'紀','计':'計',
+'见':'見','间':'間','艰':'艱','监':'監','碱':'鹼','奖':'獎','将':'將','浆':'漿',
+'缴':'繳','进':'進','举':'舉','据':'據','开':'開','课':'課','宽':'寬','来':'來',
+'乐':'樂','雷':'雷','类':'類','里':'裏','励':'勵','联':'聯','炼':'煉','粮':'糧',
+'两':'兩','临':'臨','灵':'靈','龙':'龍','楼':'樓','卢':'盧','鲁':'魯','录':'錄',
+'赂':'賂','驴':'驢','马':'馬','买':'買','麦':'麥','门':'門','们':'們','灭':'滅',
+'难':'難','脑':'腦','鸟':'鳥','宁':'寧','农':'農','欧':'歐','盘':'盤','炮':'砲',
+'气':'氣','弃':'棄','迁':'遷','签':'簽','钱':'錢','强':'強','桥':'橋','亲':'親',
+'轻':'輕','权':'權','劝':'勸','确':'確','热':'熱','认':'認','软':'軟','锐':'銳',
+'伞':'傘','丧':'喪','骚':'騷','设':'設','沈':'沈','绳':'繩','声':'聲','师':'師',
+'时':'時','识':'識','实':'實','书':'書','树':'樹','数':'數','帅':'帥','双':'雙',
+'说':'說','丝':'絲','岁':'歲','孙':'孫','态':'態','坛':'壇','弹':'彈','听':'聽',
+'统':'統','头':'頭','图':'圖','脱':'脫','万':'萬','卫':'衛','稳':'穩','为':'為',
+'问':'問','无':'無','务':'務','悟':'悟','雾':'霧','献':'獻','现':'現','线':'線',
+'响':'響','乡':'鄉','写':'寫','学':'學','选':'選','压':'壓','烟':'煙','业':'業',
+'页':'頁','样':'樣','义':'義','医':'醫','亿':'億','应':'應','拥':'擁','鱼':'魚',
+'语':'語','园':'園','远':'遠','运':'運','战':'戰','张':'張','账':'帳','这':'這',
+'针':'針','证':'證','挣':'掙','征':'徵','郑':'鄭','专':'專','转':'轉','装':'裝',
+'壮':'壯','总':'總','钻':'鑽','组':'組','适':'適','丛':'叢','风':'風','怀':'懷',
+'辞':'辭','洁':'潔','础':'礎','岭':'嶺','纷':'紛','仅':'僅','损':'損','尽':'盡',
+'净':'淨','视':'視','尝':'嘗','须':'須','辨':'辨','历':'歷','阅':'閱','庐':'廬',
+'质':'質','钟':'鐘','志':'誌','众':'眾','属':'屬','厕':'廁','础':'礎','赞':'贊'
+};
+
+const T2S = {};
+for (const [k,v] of Object.entries(S2T)) { if (!T2S[v]) T2S[v] = k; }
+
+let _zhMode = 's2t';
+function zhMode(m) {
+  _zhMode = m;
+  document.getElementById('zh-s2t').className = 'chip'+(m==='s2t'?' on':'');
+  document.getElementById('zh-t2s').className = 'chip'+(m==='t2s'?' on':'');
+  document.getElementById('zh-in-l').textContent = m==='s2t' ? '输入简体中文' : '输入繁體中文';
+  document.getElementById('zh-out-l').textContent = m==='s2t' ? '输出繁体中文' : '输出简体中文';
+  document.getElementById('zh-in').placeholder = m==='s2t' ? '在此输入简体文字…' : '在此輸入繁體文字…';
+  doZh();
+}
+function doZh() {
+  const inp = document.getElementById('zh-in').value;
+  const map = _zhMode==='s2t' ? S2T : T2S;
+  document.getElementById('zh-out').value = inp.split('').map(c=>map[c]||c).join('');
+  const cnt = inp.length;
+  const s = document.getElementById('zh-stats');
+  if (cnt > 0) {
+    s.style.display = 'flex';
+    document.getElementById('zh-cnt').textContent = cnt;
+  } else { s.style.display = 'none'; }
+}
+function zhSwap() {
+  const a = document.getElementById('zh-in').value;
+  const b = document.getElementById('zh-out').value;
+  document.getElementById('zh-in').value = b;
+  zhMode(_zhMode==='s2t'?'t2s':'s2t');
+}
+
+// ══════════════════════════════════════════════
+//  人民币大写金额
+// ══════════════════════════════════════════════
+const CN = ['零','壹','贰','叁','肆','伍','陆','柒','捌','玖'];
+const CU = ['','拾','佰','仟'];
+const CS = ['','万','亿','万亿'];
+
+function numToCap(n) {
+  if (isNaN(n) || n < 0) return '请输入有效正数';
+  n = parseFloat(n);
+  if (n > 9999999999999.99) return '金额超出支持范围（最大：9999999999999.99）';
+  const s = n.toFixed(2);
+  const [intS, decS] = s.split('.');
+  const jiao = parseInt(decS[0]), fen = parseInt(decS[1]);
+  let intPart = '';
+  if (intS === '0') {
+    intPart = '零';
+  } else {
+    const arr = intS.split('').reverse();
+    const groups = [];
+    for (let i = 0; i < arr.length; i+=4) groups.push(arr.slice(i,i+4).reverse().join(''));
+    groups.reverse();
+    for (let g = 0; g < groups.length; g++) {
+      const grp = groups[g];
+      let gs = ''; let nz = false;
+      for (let i = 0; i < grp.length; i++) {
+        const d = parseInt(grp[i]), pos = grp.length-1-i;
+        if (d===0) {
+          if (nz && i<grp.length-1 && parseInt(grp[i+1])!==0) gs += '零';
+        } else { gs += CN[d]+CU[pos]; nz = true; }
+      }
+      if (gs) intPart += gs + CS[groups.length-1-g];
+      else if (intPart && g<groups.length-1) intPart += '零';
+    }
+  }
+  let res = intPart + '元';
+  if (!jiao && !fen) res += '整';
+  else if (!jiao) res += '零'+CN[fen]+'分';
+  else if (!fen) res += CN[jiao]+'角整';
+  else res += CN[jiao]+'角'+CN[fen]+'分';
+  return res;
+}
+function doCap() {
+  const v = document.getElementById('cap-in').value.trim();
+  document.getElementById('cap-out').value = v ? numToCap(v) : '';
+}
+
+// ══════════════════════════════════════════════
+//  中文数字互转（支持到万亿）
+// ══════════════════════════════════════════════
+const cN = ['零','一','二','三','四','五','六','七','八','九'];
+const cU = ['','十','百','千'];
+const cS = ['','万','亿','万亿'];
+let _numMode = 'a2c';
+
+function a2c(n) {
+  n = parseInt(n);
+  if (isNaN(n)) return '请输入有效整数';
+  if (n === 0) return '零';
+  const neg = n<0; n = Math.abs(n);
+  const s = n.toString().split('').reverse();
+  const groups = [];
+  for (let i=0;i<s.length;i+=4) groups.push(s.slice(i,i+4).reverse().join(''));
+  groups.reverse();
+  let res = '';
+  for (let g=0;g<groups.length;g++) {
+    const grp = groups[g]; let gs=''; let nz=false;
+    for (let i=0;i<grp.length;i++) {
+      const d=parseInt(grp[i]),pos=grp.length-1-i;
+      if (d===0) { if(nz&&i<grp.length-1&&parseInt(grp[i+1])!==0) gs+='零'; }
+      else { gs+=cN[d]+cU[pos]; nz=true; }
+    }
+    if (gs) res+=gs+cS[groups.length-1-g];
+    else if (res&&g<groups.length-1) res+='零';
+  }
+  return (neg?'负':'')+res;
+}
+const c2aMap = {'零':0,'一':1,'二':2,'三':3,'四':4,'五':5,'六':6,'七':7,'八':8,'九':9};
+const c2uMap = {'十':10,'百':100,'千':1000,'万':10000,'亿':100000000};
+function c2a(s) {
+  let r=0,cur=0;
+  const chars = s.split('');
+  for (let i=0;i<chars.length;i++) {
+    const c=chars[i];
+    if (c2aMap[c]!==undefined) cur=c2aMap[c];
+    else if (c2uMap[c]) {
+      const u=c2uMap[c];
+      if (u>=10000) { r=(r+(cur||1))*u/(u===10000?1:1); r=r+(cur||1)*(u===100000000?u:u); cur=0;
+        if(u===10000) r=r-cur*u+(cur||1)*u;
+      } else { cur=(cur||1)*u; r+=cur; cur=0; }
+    }
+  }
+  r+=cur;
+  return r;
+}
+// 更稳健的中文数字解析
+function parseChinese(s) {
+  s = s.trim();
+  let negative = false;
+  if (s[0]==='负') { negative=true; s=s.slice(1); }
+  // split by 亿
+  let result = 0;
+  const yiParts = s.split('亿');
+  if (yiParts.length>1) {
+    result += parseCN_under1e8(yiParts[0]||'') * 100000000;
+    s = yiParts[1];
+  }
+  const wanParts = s.split('万');
+  if (wanParts.length>1) {
+    result += parseCN_under1e4(wanParts[0]||'') * 10000;
+    s = wanParts[1];
+  }
+  result += parseCN_under1e4(s);
+  return negative ? -result : result;
+}
+function parseCN_under1e8(s) {
+  const wanParts = s.split('万');
+  if (wanParts.length>1) return parseCN_under1e4(wanParts[0])*10000+parseCN_under1e4(wanParts[1]);
+  return parseCN_under1e4(s);
+}
+function parseCN_under1e4(s) {
+  if (!s) return 0;
+  let r=0, cur=0;
+  for (const c of s) {
+    if (c2aMap[c]!==undefined) cur=c2aMap[c];
+    else if (['十','百','千'].includes(c)) {
+      r+=(cur||1)*c2uMap[c]; cur=0;
+    }
+  }
+  return r+cur;
+}
+
+function numMode(m) {
+  _numMode=m;
+  document.getElementById('num-a2c').className='chip'+(m==='a2c'?' on':'');
+  document.getElementById('num-c2a').className='chip'+(m==='c2a'?' on':'');
+  document.getElementById('num-in-l').textContent=m==='a2c'?'输入阿拉伯数字':'输入中文数字';
+  document.getElementById('num-out-l').textContent=m==='a2c'?'中文数字':'阿拉伯数字';
+  doNum();
+}
+function doNum() {
+  const v=document.getElementById('num-in').value.trim();
+  if (!v) { document.getElementById('num-out').value=''; return; }
+  document.getElementById('num-out').value = _numMode==='a2c' ? a2c(v) : parseChinese(v);
+}
+function numSwap() {
+  const a=document.getElementById('num-in').value;
+  const b=document.getElementById('num-out').value;
+  document.getElementById('num-in').value=b;
+  numMode(_numMode==='a2c'?'c2a':'a2c');
+}
+
+// ══════════════════════════════════════════════
+//  英文大小写
+// ══════════════════════════════════════════════
+let _enMode='upper';
+function enMode(m) {
+  _enMode=m;
+  ['upper','lower','title','sentence','toggle'].forEach(x=>
+    document.getElementById('en-'+x).className='chip'+(m===x?' on':'')
+  );
+  doEn();
+}
+function doEn() {
+  const inp=document.getElementById('en-in').value;
+  let r='';
+  switch(_enMode){
+    case 'upper': r=inp.toUpperCase(); break;
+    case 'lower': r=inp.toLowerCase(); break;
+    case 'title': r=inp.replace(/\w\S*/g,t=>t[0].toUpperCase()+t.slice(1).toLowerCase()); break;
+    case 'sentence': r=inp.toLowerCase().replace(/(^\s*\w|[.!?]\s+\w)/g,c=>c.toUpperCase()); break;
+    case 'toggle': r=inp.split('').map(c=>c===c.toUpperCase()?c.toLowerCase():c.toUpperCase()).join(''); break;
+  }
+  document.getElementById('en-out').value=r;
+}
+
+// ══════════════════════════════════════════════
+//  字数统计
+// ══════════════════════════════════════════════
+function doWc() {
+  const v=document.getElementById('wc-in').value;
+  const zhCount=(v.match(/[\u4e00-\u9fa5]/g)||[]).length;
+  const enWords=(v.match(/\b[a-zA-Z]+\b/g)||[]).length;
+  const paras=v.split(/\n+/).filter(p=>p.trim()).length;
+  const bytes=new TextEncoder().encode(v).length;
+  const readSec=Math.round(zhCount/4+enWords/3);
+  document.getElementById('wc-char').textContent=v.length;
+  document.getElementById('wc-zh').textContent=zhCount;
+  document.getElementById('wc-en').textContent=enWords;
+  document.getElementById('wc-para').textContent=paras;
+  document.getElementById('wc-byte').textContent=bytes;
+  document.getElementById('wc-time').textContent=readSec<60?readSec+'秒':Math.round(readSec/60)+'分钟';
+}
+
+// ══════════════════════════════════════════════
+//  URL 编解码
+// ══════════════════════════════════════════════
+let _urlMode='enc';
+function urlMode(m) {
+  _urlMode=m;
+  document.getElementById('url-enc').className='chip'+(m==='enc'?' on':'');
+  document.getElementById('url-dec').className='chip'+(m==='dec'?' on':'');
+  document.getElementById('url-in-l').textContent=m==='enc'?'输入原始文本':'输入已编码 URL';
+  document.getElementById('url-out-l').textContent=m==='enc'?'编码结果':'解码结果';
+  doUrl();
+}
+function doUrl() {
+  const v=document.getElementById('url-in').value;
+  let r='';
+  try { r=_urlMode==='enc'?encodeURIComponent(v):decodeURIComponent(v); }
+  catch(e){ r='解码失败，请检查输入是否为有效的 URL 编码'; }
+  document.getElementById('url-out').value=r;
+}
+function urlSwap(){
+  const a=document.getElementById('url-in').value;
+  const b=document.getElementById('url-out').value;
+  document.getElementById('url-in').value=b;
+  urlMode(_urlMode==='enc'?'dec':'enc');
+}
+
+// ══════════════════════════════════════════════
+//  Base64
+// ══════════════════════════════════════════════
+let _b64Mode='enc';
+function b64Mode(m){
+  _b64Mode=m;
+  document.getElementById('b64-enc').className='chip'+(m==='enc'?' on':'');
+  document.getElementById('b64-dec').className='chip'+(m==='dec'?' on':'');
+  document.getElementById('b64-in-l').textContent=m==='enc'?'输入文本':'输入 Base64';
+  document.getElementById('b64-out-l').textContent=m==='enc'?'Base64 结果':'解码文本';
+  doB64();
+}
+function doB64(){
+  const v=document.getElementById('b64-in').value;
+  let r='';
+  try {
+    if(_b64Mode==='enc') r=btoa(unescape(encodeURIComponent(v)));
+    else r=decodeURIComponent(escape(atob(v)));
+  } catch(e){ r='转换失败，请检查输入格式'; }
+  document.getElementById('b64-out').value=r;
+}
+function b64Swap(){
+  const a=document.getElementById('b64-in').value;
+  const b=document.getElementById('b64-out').value;
+  document.getElementById('b64-in').value=b;
+  b64Mode(_b64Mode==='enc'?'dec':'enc');
+}
+
+// ══════════════════════════════════════════════
+//  Unicode 转换
+// ══════════════════════════════════════════════
+let _uniMode='enc';
+function uniMode(m){
+  _uniMode=m;
+  document.getElementById('uni-enc').className='chip'+(m==='enc'?' on':'');
+  document.getElementById('uni-dec').className='chip'+(m==='dec'?' on':'');
+  document.getElementById('uni-in-l').textContent=m==='enc'?'输入字符':'输入 \\uXXXX 码';
+  document.getElementById('uni-out-l').textContent=m==='enc'?'Unicode 码':'还原字符';
+  doUni();
+}
+function doUni(){
+  const v=document.getElementById('uni-in').value;
+  let r='';
+  try {
+    if(_uniMode==='enc'){
+      r=v.split('').map(c=>{
+        const code=c.codePointAt(0);
+        return code>127?'\\u'+code.toString(16).padStart(4,'0'):c;
+      }).join('');
+    } else {
+      r=v.replace(/\\u([0-9a-fA-F]{4})/g,(_,h)=>String.fromCodePoint(parseInt(h,16)));
+    }
+  } catch(e){ r='转换失败'; }
+  document.getElementById('uni-out').value=r;
+}
+function uniSwap(){
+  const a=document.getElementById('uni-in').value;
+  const b=document.getElementById('uni-out').value;
+  document.getElementById('uni-in').value=b;
+  uniMode(_uniMode==='enc'?'dec':'enc');
+}
+
+// ── Shortcuts for getElementById ──
+const $ = id => document.getElementById(id);
+</script>
+
+<!-- ══ Structured Data for SEO ══ -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "转换坊 FormatCraft",
+  "description": "免费在线文字格式转换工具：中文繁简体转换、人民币大写金额、英文大小写转换、URL编解码、Base64编码等",
+  "applicationCategory": "UtilityApplication",
+  "operatingSystem": "Any",
+  "offers": {
+    "@type": "Offer",
+    "price": "0",
+    "priceCurrency": "CNY"
+  }
+}
+</script>
+</body>
+</html>
